@@ -11,6 +11,9 @@
 |
 */
 
+Route::resource('api/users', 'Api\UsersController');
+Route::resource('api/address', 'Api\AddressController');
+
 Route::get('/', function () {
     return view('welcome');
 });
