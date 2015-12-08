@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $casts = [
-        'prices' => 'json',
-        'options' => 'json'
+        'prices' => 'object',
+        'options' => 'object'
     ];
 }
