@@ -28,3 +28,10 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
         'notes' => $faker->paragraph,
     ];
 });
+
+$factory->define(App\Order::class, function (Faker\Generator $faker) {
+    return [
+        'user_id' => rand(0, 9),
+        'status' => (rand(0, 9) % 2 == 0) ? "processing" : "complete"
+    ];
+});

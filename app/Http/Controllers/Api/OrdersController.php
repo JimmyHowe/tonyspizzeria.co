@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Order;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use JimmyHowe\Utilities\ApiTrait\ApiTrait;
 
-class UsersController extends Controller
+class OrdersController extends Controller
 {
     use ApiTrait;
 
@@ -20,11 +20,21 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::with('addresses', 'orders')->get();
+        $orders = Order::all();
 
         return $this->respond([
-            'data' => $users
+            'data' => $orders
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -46,11 +56,18 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        $user = User::with('addresses')->find($id);
+        //
+    }
 
-        return $this->respond([
-            'data' => $user
-        ]);
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
     }
 
     /**

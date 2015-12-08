@@ -13,6 +13,7 @@
 
 Route::resource('api/users', 'Api\UsersController');
 Route::resource('api/address', 'Api\AddressController');
+Route::resource('api/orders', 'Api\OrdersController');
 
 Route::get('/', function () {
     return view('welcome');
