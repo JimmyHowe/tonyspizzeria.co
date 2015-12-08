@@ -20,7 +20,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('products')->get();
 
         return $this->respond([
             'data' => $orders
