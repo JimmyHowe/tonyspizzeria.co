@@ -12,7 +12,7 @@
 */
 
 Route::resource('api/users', 'Api\UsersController');
-Route::resource('api/address', 'Api\AddressController');
+Route::resource('api/address', 'Api\AddressesController');
 Route::resource('api/orders', 'Api\OrdersController');
 
 Route::get('/', function () {

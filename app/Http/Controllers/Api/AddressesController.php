@@ -9,7 +9,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use JimmyHowe\Utilities\ApiTrait\ApiTrait;
 
-class AddressController extends Controller
+class AddressesController extends Controller
 {
     use ApiTrait;
 
