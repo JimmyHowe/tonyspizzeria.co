@@ -14,6 +14,7 @@
 Route::resource('api/users', 'Api\UsersController');
 Route::resource('api/address', 'Api\AddressesController');
 Route::resource('api/orders', 'Api\OrdersController');
+Route::resource('api/products', 'Api\ProductsController');
 
 Route::get('/', function () {
     return view('welcome');

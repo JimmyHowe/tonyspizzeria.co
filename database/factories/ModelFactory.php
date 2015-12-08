@@ -35,3 +35,12 @@ $factory->define(App\Order::class, function (Faker\Generator $faker) {
         'status' => (rand(0, 9) % 2 == 0) ? "processing" : "complete"
     ];
 });
+
+$factory->define(App\Product::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence,
+        'description' => $faker->paragraph,
+        'prices' => [ 'medium' => 2.00 ],
+        'options' => [ 'vegetarian' => true ]
+    ];
+});
