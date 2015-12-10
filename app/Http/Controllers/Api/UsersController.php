@@ -20,7 +20,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::with('addresses', 'orders')->get();
+        $users = User::with('addresses', 'phoneNumbers', 'orders')->get();
 
         return $this->respond([
             'data' => $users

@@ -31,4 +31,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany(Order::class);
     }
+
+    public function phoneNumbers()
+    {
+        return $this->belongsToMany(PhoneNumber::class);
+    }
 }

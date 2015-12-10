@@ -29,6 +29,13 @@ $factory->define(App\Address::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\PhoneNumber::class, function (Faker\Generator $faker) {
+    return [
+        'number' => $faker->numerify('0141#######'),
+        'notes' => $faker->sentence
+    ];
+});
+
 $factory->define(App\Order::class, function (Faker\Generator $faker) {
     return [
         'user_id' => rand(0, 9),
