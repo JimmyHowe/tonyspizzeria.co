@@ -22,5 +22,5 @@ Route::resource('api/menu', 'Api\MenuController');
 Route::controller('activator', 'Activator\ActivationController');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontend.menu');
 });
