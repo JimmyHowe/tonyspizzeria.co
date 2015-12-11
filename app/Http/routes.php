@@ -17,6 +17,8 @@ Route::resource('api/orders', 'Api\OrdersController');
 Route::resource('api/products', 'Api\ProductsController');
 Route::resource('api/applications', 'Api\ApplicationsController');
 
+Route::controller('activator', 'Activator\ActivationController');
+
 Route::get('/', function () {
     return view('welcome');
 });

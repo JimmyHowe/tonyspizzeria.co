@@ -9,5 +9,7 @@ class Application extends Model
 {
     use SluggableTitle;
 
-    protected $fillable = [ 'title', 'key' ];
+    protected $fillable = [ 'title', 'key', 'expires_at' ];
+
+    protected $dates    = [ 'expires_at' ];
 }

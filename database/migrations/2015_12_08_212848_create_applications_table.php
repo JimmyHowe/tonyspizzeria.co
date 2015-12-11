@@ -17,6 +17,7 @@ class CreateApplicationsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('key');
+            $table->dateTime('expires_at');
             $table->timestamps();
         });
     }
