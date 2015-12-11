@@ -364,16 +364,16 @@
         },
         {
             "name": "jimmyhowe/laravel-api-trait",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JimmyHowe/ApiTrait.git",
-                "reference": "2b38677ec3a86a73067be7e3e6250537f37351d3"
+                "reference": "0618f8740669a601c075cf5009d8356fe568b6db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JimmyHowe/ApiTrait/zipball/2b38677ec3a86a73067be7e3e6250537f37351d3",
-                "reference": "2b38677ec3a86a73067be7e3e6250537f37351d3",
+                "url": "https://api.github.com/repos/JimmyHowe/ApiTrait/zipball/0618f8740669a601c075cf5009d8356fe568b6db",
+                "reference": "0618f8740669a601c075cf5009d8356fe568b6db",
                 "shasum": ""
             },
             "require": {
@@ -400,7 +400,7 @@
                 }
             ],
             "description": "Laravel API Trait",
-            "time": "2015-12-11 06:30:01"
+            "time": "2015-12-11 07:04:47"
         },
         {
             "name": "laravel/framework",
