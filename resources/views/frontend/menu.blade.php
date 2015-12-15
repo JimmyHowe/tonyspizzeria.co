@@ -20,7 +20,7 @@
 
         <div class="col-md-8">
 
-            <menu></menu>
+            <menu :menu="menu"></menu>
 
         </div>
 

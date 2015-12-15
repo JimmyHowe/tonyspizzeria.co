@@ -10380,7 +10380,17 @@ Vue.component('menu', require("./components/menu/menu"));
 
 new Vue({
 
-  el: "#app"
+  el: "#app",
+
+  data: {
+    menu: {}
+  },
+
+  ready: function ready() {
+    this.$http.get('api/menu', function (response, status, request) {
+      this.menu = response.data;
+    });
+  }
 
 });
 
@@ -10395,22 +10405,12 @@ module.exports = {
 
   template: require("./menu.template.html"),
 
-  data: function data() {
-    return {
-      menu: {}
-    };
-  },
-
-  ready: function ready() {
-    this.$http.get('api/menu', function (response, status, request) {
-      this.menu = response.data;
-    });
-  }
+  props: ['menu']
 
 };
 
 },{"./menu.template.html":13}],13:[function(require,module,exports){
-module.exports = '\n    <div class="panel panel-default" v-for="group in menu.groups">\n\n        <div class="panel-heading">\n            <h1>{{ group.title }}</h1>\n        </div>\n\n        <table class="table">\n\n            <tr v-for="product in group.products">\n\n                <td>{{ product.title }}</td>\n\n                <td v-for="price in product.prices">\n                    {{ price | currency \'£\' }}\n                </td>\n\n            </tr>\n\n        </table>\n\n    </div>\n\n    <pre>{{ $data | json }}</pre>';
+module.exports = '\n    <div class="panel panel-default" v-for="group in menu.groups">\n\n        <div class="panel-heading">\n            <h1>{{ group.title }}</h1>\n        </div>\n\n        <table class="table">\n\n            <tr v-for="product in group.products">\n\n                <td>{{ product.title }}</td>\n\n                <td v-for="price in product.prices">\n                    {{ price | currency \'£\' }}\n                </td>\n\n            </tr>\n\n        </table>\n\n    </div>\n\n    <!--<pre>{{ $data | json }}</pre>-->';
 },{}]},{},[11]);
 
 //# sourceMappingURL=app.js.map

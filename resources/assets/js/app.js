@@ -10,6 +10,18 @@ Vue.component('menu', require("./components/menu/menu"));
 
 new Vue({
 
-  el: "#app"
+  el: "#app",
+
+  data: {
+    menu: {}
+  },
+
+  ready: function()
+  {
+    this.$http.get('api/menu', function(response, status, request)
+    {
+      this.menu = response.data;
+    });
+  }
 
 });
