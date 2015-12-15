@@ -5779,15 +5779,34 @@ body {
   border-radius: 0;
   box-shadow: 8px 8px 20px -2px rgba(0, 0, 0, 0.5); }
   .panel .panel-heading {
+    padding: 0;
     background-color: inherit; }
     .panel .panel-heading h1 {
       margin: 0;
-      padding: 4px 6px;
+      padding: 8px;
       background-color: #cc0000;
       color: whitesmoke;
       font-family: "Georgia", Times, serif;
       font-size: 30px;
       text-transform: uppercase;
       text-align: center; }
+
+.Menu .Menu__Item {
+  cursor: pointer;
+  font-weight: bold; }
+  .Menu .Menu__Item .Menu__Price {
+    width: 60px;
+    font-weight: bold;
+    text-align: center; }
+
+.Menu .Menu__Options {
+  display: none; }
+  .Menu .Menu__Options .Menu__Description {
+    color: red; }
+  .Menu .Menu__Options .Menu__Button {
+    text-align: center;
+    vertical-align: middle; }
+    .Menu .Menu__Options .Menu__Button button {
+      cursor: pointer; }
 
 /*# sourceMappingURL=app.css.map */

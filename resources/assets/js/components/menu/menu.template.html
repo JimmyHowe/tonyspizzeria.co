@@ -5,28 +5,11 @@
             <h1 id="{{ group.slug }}">{{ group.title }}</h1>
         </div>
 
-        <div class="panel-body">
+        <table class="table Menu">
 
-            <table class="table">
+            <tr v-for="product in group.products" is="item" :item="product"></tr>
 
-                <tr v-for="product in group.products">
-
-                    <td>
-                        {{ product.title }}
-
-                        <span v-if="product.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
-
-                    </td>
-
-                    <td v-for="price in product.prices">
-                        {{ price | currency '£' }}
-                    </td>
-
-                </tr>
-
-            </table>
-
-        </div>
+        </table>
 
     </div>
 

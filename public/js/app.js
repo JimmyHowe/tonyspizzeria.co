@@ -10378,6 +10378,8 @@ Vue.use(require('vue-resource'));
 
 Vue.component('menu', require("./components/menu/menu"));
 
+Vue.component('item', require("./components/item/item"));
+
 new Vue({
 
   el: "#app",
@@ -10394,7 +10396,33 @@ new Vue({
 
 });
 
-},{"./components/menu/menu":12,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
+},{"./components/item/item":12,"./components/menu/menu":14,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
+"use strict";
+
+/**
+ * Created by Jimmy on 15/12/2015.
+ */
+
+module.exports = {
+
+  template: require("./item.template.html"),
+
+  props: ['item'],
+
+  methods: {
+    showDetails: function showDetails(event) {
+      var clicked = $(event.target);
+      var tbody = clicked.closest("tbody");
+      //tbody.find('.Menu__Description').hide();
+      var itemDescription = clicked.closest("tr").next().toggle();
+    }
+  }
+
+};
+
+},{"./item.template.html":13}],13:[function(require,module,exports){
+module.exports = '\n    <tr class="Menu__Item" @click="showDetails($event)">\n        <td>\n            {{ item.title }}\n            <span v-if="item.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>\n        </td>\n\n        <td class="Menu__Price" v-for="price in item.prices">\n            {{ price | currency \'£\' }}\n        </td>\n    </tr>\n\n    <tr class="Menu__Options">\n\n        <td class="Menu__Description small">\n            {{ item.description }}\n        </td>\n\n        <td class="Menu__Button" v-for="(index, price) in item.prices">\n            <button class="btn btn-sm">Add</button>\n            <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->\n        </td>\n    </tr>';
+},{}],14:[function(require,module,exports){
 "use strict";
 
 /**
@@ -10409,8 +10437,8 @@ module.exports = {
 
 };
 
-},{"./menu.template.html":13}],13:[function(require,module,exports){
-module.exports = '\n    <div class="panel panel-default" v-for="group in menu.groups">\n\n        <div class="panel-heading">\n            <h1 id="{{ group.slug }}">{{ group.title }}</h1>\n        </div>\n\n        <div class="panel-body">\n\n            <table class="table">\n\n                <tr v-for="product in group.products">\n\n                    <td>\n                        {{ product.title }}\n\n                        <span v-if="product.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>\n\n                    </td>\n\n                    <td v-for="price in product.prices">\n                        {{ price | currency \'£\' }}\n                    </td>\n\n                </tr>\n\n            </table>\n\n        </div>\n\n    </div>\n\n    <!--<pre>{{ $data | json }}</pre>-->';
+},{"./menu.template.html":15}],15:[function(require,module,exports){
+module.exports = '\n    <div class="panel panel-default" v-for="group in menu.groups">\n\n        <div class="panel-heading">\n            <h1 id="{{ group.slug }}">{{ group.title }}</h1>\n        </div>\n\n        <table class="table Menu">\n\n            <tr v-for="product in group.products" is="item" :item="product"></tr>\n\n        </table>\n\n    </div>\n\n    <!--<pre>{{ $data | json }}</pre>-->';
 },{}]},{},[11]);
 
 //# sourceMappingURL=app.js.map

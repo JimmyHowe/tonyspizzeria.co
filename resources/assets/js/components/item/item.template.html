@@ -1,0 +1,23 @@
+
+    <tr class="Menu__Item" @click="showDetails($event)">
+        <td>
+            {{ item.title }}
+            <span v-if="item.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
+        </td>
+
+        <td class="Menu__Price" v-for="price in item.prices">
+            {{ price | currency '£' }}
+        </td>
+    </tr>
+
+    <tr class="Menu__Options">
+
+        <td class="Menu__Description small">
+            {{ item.description }}
+        </td>
+
+        <td class="Menu__Button" v-for="(index, price) in item.prices">
+            <button class="btn btn-sm">Add</button>
+            <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->
+        </td>
+    </tr>

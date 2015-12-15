@@ -8,6 +8,8 @@ Vue.use(require('vue-resource'));
 
 Vue.component('menu', require("./components/menu/menu"));
 
+Vue.component('item', require("./components/item/item"));
+
 new Vue({
 
   el: "#app",
