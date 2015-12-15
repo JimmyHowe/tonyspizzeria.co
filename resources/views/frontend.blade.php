@@ -14,6 +14,8 @@
 </head>
 <body id="app">
 
+    @include('frontend.partials._navbar')
+
     @include('frontend.partials._spash')
 
     <div class="container">
