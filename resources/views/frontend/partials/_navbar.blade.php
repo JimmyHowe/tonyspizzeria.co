@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-tonys">
+    <nav class="navbar navbar-tonys navbar-static-top">
 
         <div class="container">
 
