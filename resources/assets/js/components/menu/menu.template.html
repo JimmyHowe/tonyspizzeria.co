@@ -9,7 +9,12 @@
 
             <tr v-for="product in group.products">
 
-                <td>{{ product.title }}</td>
+                <td>
+                    {{ product.title }}
+
+                    <span v-if="product.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>
+
+                </td>
 
                 <td v-for="price in product.prices">
                     {{ price | currency '£' }}
