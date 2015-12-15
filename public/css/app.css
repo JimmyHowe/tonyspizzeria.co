@@ -5771,4 +5771,20 @@ body {
       padding-top: 10px;
       padding-bottom: 10px; } }
 
+.panel {
+  background-color: whitesmoke;
+  border-radius: 0;
+  box-shadow: 8px 8px 20px -2px rgba(0, 0, 0, 0.5); }
+  .panel .panel-heading {
+    background-color: inherit; }
+    .panel .panel-heading h1 {
+      margin: 0;
+      padding: 4px 6px;
+      background-color: #cc0000;
+      color: whitesmoke;
+      font-family: "Georgia", Times, serif;
+      font-size: 30px;
+      text-transform: uppercase;
+      text-align: center; }
+
 /*# sourceMappingURL=app.css.map */
