@@ -20,7 +20,9 @@ class GroupsController extends Controller
      */
     public function index()
     {
-        //
+        $goups = Group::with(['products'])->get();
+
+        return $this->respondWithSuccess("Success!", $goups);
     }
 
     /**
