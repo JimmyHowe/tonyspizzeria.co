@@ -34,6 +34,14 @@ module.exports = {
           this.selected = this.groups[i].headers;
         }
       }
+    },
+
+    submit: function () {
+      this.$http.post('/api/products', this.form, function (response, status, request) {
+        this.init();
+      }).error(function (response, status, request) {
+        console.log(response);
+      })
     }
   },
 
