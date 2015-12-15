@@ -11,16 +11,10 @@
 |
 */
 
-Route::resource('api/users', 'Api\UsersController');
-Route::resource('api/address', 'Api\AddressesController');
-Route::resource('api/orders', 'Api\OrdersController');
-Route::resource('api/products', 'Api\ProductsController');
-Route::resource('api/applications', 'Api\ApplicationsController');
-
-Route::resource('api/menu', 'Api\MenuController');
+require "routes/api.routes.php";
+require "routes/backend.routes.php";
+require "routes/frontend.routes.php";
 
 Route::controller('activator', 'Activator\ActivationController');
 
-Route::get('/', function () {
-    return view('frontend.menu');
-});
+
