@@ -2,6 +2,14 @@
 
 @section('content')
 
-    MENU
+    <div class="row">
+
+        <div class="col-md-8">
+
+            <menu></menu>
+
+        </div>
+
+    </div>
 
 @stop

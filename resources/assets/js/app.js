@@ -4,8 +4,12 @@
 
 var Vue = require('vue');
 
-Vue.use(require('vue'));
+Vue.use(require('vue-resource'));
+
+Vue.component('menu', require("./components/menu/menu"));
 
 new Vue({
-    
+
+  el: "#app"
+
 });
