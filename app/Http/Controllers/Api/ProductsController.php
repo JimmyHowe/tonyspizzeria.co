@@ -45,7 +45,16 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = (new Requests\CreateProductRequest())->rules();
+
+        if($this->validateAgainstRules($request, $rules)->fails())
+        {
+            return $this->respondValidationFailed();
+        }
+
+        $product = Product::create($request->all());
+
+        return $this->respondWithSuccess("Success!", $product);
     }
 
     /**

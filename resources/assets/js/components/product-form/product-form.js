@@ -25,6 +25,7 @@ module.exports = {
   },
 
   methods: {
+
     updatePrices: function()
     {
       for(var i = 0; i < this.groups.length; i++)
@@ -32,12 +33,15 @@ module.exports = {
         if(this.groups[i].id == this.group)
         {
           this.selected = this.groups[i].headers;
+          this.form.group_id = this.groups[i].id
         }
       }
     },
 
-    submit: function () {
+    submit: function ()
+    {
       this.$http.post('/api/products', this.form, function (response, status, request) {
+        console.log(response);
         this.init();
       }).error(function (response, status, request) {
         console.log(response);
