@@ -9,12 +9,18 @@ module.exports = {
   props: [ 'item' ],
 
   methods: {
+
     showDetails: function(event)
     {
       var clicked = $(event.target);
       var tbody = clicked.closest("tbody");
       //tbody.find('.Menu__Description').hide();
       var itemDescription = clicked.closest("tr").next().toggle();
+    },
+
+    addItemToBasket: function(item, index)
+    {
+      this.$dispatch('basket.add', item, index);
     }
   }
 

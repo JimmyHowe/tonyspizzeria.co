@@ -14,6 +14,8 @@
 
         <div class="col-md-8">
 
+            <basket></basket>
+
             <menu :menu="menu"></menu>
 
         </div>

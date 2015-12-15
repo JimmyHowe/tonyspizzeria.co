@@ -10376,6 +10376,8 @@ var Vue = require('vue');
 
 Vue.use(require('vue-resource'));
 
+Vue.component('basket', require("./components/basket/basket"));
+
 Vue.component('menu', require("./components/menu/menu"));
 
 Vue.component('item', require("./components/item/item"));
@@ -10383,6 +10385,8 @@ Vue.component('item', require("./components/item/item"));
 Vue.component('group-form', require("./components/group-form/group-form"));
 
 Vue.component('product-form', require("./components/product-form/product-form"));
+
+Vue.config.debug = true;
 
 new Vue({
 
@@ -10396,11 +10400,66 @@ new Vue({
     this.$http.get('/api/menu', function (response, status, request) {
       this.menu = response.data;
     });
+
+    this.$on('basket.add', function (item, index) {
+      this.$broadcast('basket.add', item, index);
+    });
   }
 
 });
 
-},{"./components/group-form/group-form":12,"./components/item/item":14,"./components/menu/menu":16,"./components/product-form/product-form":18,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
+},{"./components/basket/basket":12,"./components/group-form/group-form":14,"./components/item/item":16,"./components/menu/menu":18,"./components/product-form/product-form":20,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
+"use strict";
+
+/**
+ * Created by Jimmy on 15/12/2015.
+ */
+
+module.exports = {
+
+  template: require('./basket.template.html'),
+
+  data: function data() {
+    return {
+      items: []
+    };
+  },
+
+  computed: {
+
+    getTotal: function getTotal() {
+      var total = 0;
+
+      for (var i = 0; i < this.items.length; i++) {
+        total = +total + +this.items[i].price;
+
+        console.log("i: " + i);
+        console.log("p: " + this.items[i].price);
+        console.log("t: " + total);
+      }
+
+      return total;
+    }
+
+  },
+
+  ready: function ready() {
+
+    this.$on('basket.add', function (item, index) {
+      var basketItem = {
+        title: item.title,
+        price: item.prices[index]
+      };
+
+      this.items.push(basketItem);
+    });
+  }
+
+};
+
+},{"./basket.template.html":13}],13:[function(require,module,exports){
+module.exports = '\n    <div class="panel panel-danger">\n\n        <div class="panel-body">\n\n            <div class="col-md-6">\n\n                <pre>{{ $data | json }}</pre>\n\n            </div>\n\n            <div class="col-md-6">\n\n                <table class="table">\n\n                    <thead>\n\n                    <tr>\n                        <td>Item</td>\n                        <td>Price</td>\n                    </tr>\n\n                    </thead>\n\n                    <tbody>\n\n                    <tr v-for="item in items">\n\n                        <td>{{ item.title }}</td>\n                        <td>{{ item.price |  currency \'£\'}}</td>\n\n                    </tr>\n\n                    </tbody>\n\n                    <tfoot>\n                    <tr>\n                        <td></td>\n                        <td>{{ getTotal }}</td>\n                    </tr>\n                    </tfoot>\n\n                </table>\n\n            </div>\n\n        </div>\n\n    </div>';
+},{}],14:[function(require,module,exports){
 'use strict';
 
 /**
@@ -10486,9 +10545,9 @@ module.exports = {
 
 };
 
-},{"./group-form.template.html":13}],13:[function(require,module,exports){
+},{"./group-form.template.html":15}],15:[function(require,module,exports){
 module.exports = '\n    <form class="form-horizontal">\n\n        <div class="form-group">\n            <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n            <div class="col-sm-10">\n                <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n            <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n            <div class="col-sm-10">\n                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n\n            <label for="be-products-description" class="col-sm-2 control-label">Headers</label>\n\n            <div class="col-sm-10">\n\n                <div class="input-group">\n                    <input v-model="header" class="form-control" @keyup.enter="add">\n                    <div class="input-group-btn">\n                        <button type="button" class="btn btn-default" @click="add">\n                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>\n                        </button>\n                    </div>\n                </div>\n\n                <hr>\n\n                <template v-for="header in form.headers">\n\n                    <div class="input-group" style="margin-bottom: 10px">\n\n                        <input v-model="form.headers[$index]" class="form-control" readonly name="headers" value="{{ form.headers[$index] }}">\n\n                        <div class="input-group-btn">\n                            <!-- Up -->\n                            <button type="button" class="btn btn-default" @click="moveUp($index)">\n                                <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>\n                            </button>\n                            <!-- Down -->\n                            <button type="button" class="btn btn-default" @click="moveDown($index)">\n                                <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>\n                            </button>\n                            <!-- Remove -->\n                            <button type="button" class="btn btn-default" @click="remove($index)">\n                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>\n                            </button>\n                        </div>\n\n                    </div>\n\n                </template>\n\n            </div>\n\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <button type="button" class="btn btn-default" @click.prevent="submit">Save</button>\n            </div>\n        </div>\n\n        <pre>{{ $data | json }}</pre>\n\n    </form>';
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 
 /**
@@ -10502,19 +10561,24 @@ module.exports = {
   props: ['item'],
 
   methods: {
+
     showDetails: function showDetails(event) {
       var clicked = $(event.target);
       var tbody = clicked.closest("tbody");
       //tbody.find('.Menu__Description').hide();
       var itemDescription = clicked.closest("tr").next().toggle();
+    },
+
+    addItemToBasket: function addItemToBasket(item, index) {
+      this.$dispatch('basket.add', item, index);
     }
   }
 
 };
 
-},{"./item.template.html":15}],15:[function(require,module,exports){
-module.exports = '\n    <tr class="Menu__Item" @click="showDetails($event)">\n        <td>\n            {{ item.title }}\n            <span v-if="item.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>\n        </td>\n\n        <td class="Menu__Price" v-for="price in item.prices">\n            {{ price | currency \'£\' }}\n        </td>\n    </tr>\n\n    <tr class="Menu__Options">\n\n        <td class="Menu__Description small">\n            {{ item.description }}\n        </td>\n\n        <td class="Menu__Button" v-for="(index, price) in item.prices">\n            <button class="btn btn-sm">Add</button>\n            <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->\n        </td>\n    </tr>';
-},{}],16:[function(require,module,exports){
+},{"./item.template.html":17}],17:[function(require,module,exports){
+module.exports = '\n    <tr class="Menu__Item" @click="showDetails($event)">\n        <td>\n            {{ item.title }}\n            <span v-if="item.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>\n        </td>\n\n        <td class="Menu__Price" v-for="price in item.prices">\n            {{ price | currency \'£\' }}\n        </td>\n    </tr>\n\n    <tr class="Menu__Options">\n\n        <td class="Menu__Description small">\n            {{ item.description }}\n        </td>\n\n        <td class="Menu__Button" v-for="(index, price) in item.prices">\n            <button class="btn btn-sm" @click="addItemToBasket(item, index)">Add</button>\n            <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->\n        </td>\n    </tr>';
+},{}],18:[function(require,module,exports){
 "use strict";
 
 /**
@@ -10529,9 +10593,9 @@ module.exports = {
 
 };
 
-},{"./menu.template.html":17}],17:[function(require,module,exports){
+},{"./menu.template.html":19}],19:[function(require,module,exports){
 module.exports = '\n    <div class="panel panel-default" v-for="group in menu.groups">\n\n        <div class="panel-heading">\n            <h1 id="{{ group.slug }}">{{ group.title }}</h1>\n        </div>\n\n        <table class="table Menu">\n\n            <tr v-for="product in group.products" is="item" :item="product"></tr>\n\n        </table>\n\n    </div>\n\n    <!--<pre>{{ $data | json }}</pre>-->';
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 'use strict';
 
 /**
@@ -10589,7 +10653,7 @@ module.exports = {
 
 };
 
-},{"./product-form.template.html":19}],19:[function(require,module,exports){
+},{"./product-form.template.html":21}],21:[function(require,module,exports){
 module.exports = '\n    <form class="form-horizontal">\n\n        <div class="form-group">\n            <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n            <div class="col-sm-10">\n                <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n            <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n            <div class="col-sm-10">\n                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n            </div>\n        </div>\n\n        <hr>\n        \n        <div class="form-group">\n            <label for="be-products-group" class="col-sm-2 control-label">Group</label>\n            <div class="col-sm-10">\n                <select class="form-control" v-model="group" @change="updatePrices">\n                    <option v-for="option in groups" v-bind:value="option.id">\n                        {{ option.title }}\n                    </option>\n                </select>\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n\n            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>\n\n            <div class="col-sm-10">\n\n                <template v-for="(index, header) in selected">\n\n                    <div style="margin-bottom: 10px" class="input-group">\n                        <span class="input-group-addon">{{ header }}</span>\n                        <input v-model="form.prices[index]" class="form-control" name="{{header}}">\n                    </div>\n\n                </template>\n\n            </div>\n\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <div class="checkbox">\n                    <label>\n                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian\n                    </label>\n                </div>\n            </div>\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <button type="button" class="btn btn-default" @click="submit">Save</button>\n            </div>\n        </div>\n\n        <pre>{{ $data | json }}</pre>\n\n    </form>';
 },{}]},{},[11]);
 

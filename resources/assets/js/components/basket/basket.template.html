@@ -1,0 +1,49 @@
+
+    <div class="panel panel-danger">
+
+        <div class="panel-body">
+
+            <div class="col-md-6">
+
+                <pre>{{ $data | json }}</pre>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <table class="table">
+
+                    <thead>
+
+                    <tr>
+                        <td>Item</td>
+                        <td>Price</td>
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    <tr v-for="item in items">
+
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.price |  currency '£'}}</td>
+
+                    </tr>
+
+                    </tbody>
+
+                    <tfoot>
+                    <tr>
+                        <td></td>
+                        <td>{{ getTotal }}</td>
+                    </tr>
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
