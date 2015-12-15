@@ -2,6 +2,7 @@
 
 $backendRoutes = function()
 {
+    Route::resource('groups', 'GroupsController');
     Route::resource('products', 'ProductsController');
 };
 
