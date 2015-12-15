@@ -1,2 +1,7 @@
-// @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+$background-green: #5d9846;
+
+body {
+  background-color: $background-green
+}
