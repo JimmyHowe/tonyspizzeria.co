@@ -13,6 +13,8 @@
 </head>
 <body id="app">
 
+    @include('frontend.partials._spash')
+
     <div class="container">
 
         @yield('content')
