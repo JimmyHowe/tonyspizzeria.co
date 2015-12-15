@@ -5,3 +5,33 @@ $background-green: #5d9846;
 body {
   background-color: $background-green
 }
+
+.navbar-tonys {
+
+  a {
+    color: #e4e6e4;
+  }
+
+  background-color: darken($background-green, 10);
+  color: whitesmoke;
+
+  .logo {
+    height: 60px;
+    position: relative;
+    top: -6px
+  }
+
+  .navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 80px;
+  }
+
+  @media (max-width: 767px) {
+    .navbar-nav > li > a {
+      line-height: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px;}
+  }
+}
+

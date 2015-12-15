@@ -5752,4 +5752,23 @@ button.close {
 body {
   background-color: #5d9846; }
 
+.navbar-tonys {
+  background-color: #487536;
+  color: whitesmoke; }
+  .navbar-tonys a {
+    color: #e4e6e4; }
+  .navbar-tonys .logo {
+    height: 60px;
+    position: relative;
+    top: -6px; }
+  .navbar-tonys .navbar-nav > li > a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 80px; }
+  @media (max-width: 767px) {
+    .navbar-tonys .navbar-nav > li > a {
+      line-height: 20px;
+      padding-top: 10px;
+      padding-bottom: 10px; } }
+
 /*# sourceMappingURL=app.css.map */

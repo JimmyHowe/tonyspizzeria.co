@@ -16,7 +16,7 @@
 
     @include('frontend.partials._navbar')
 
-    @include('frontend.partials._spash')
+    {{--@include('frontend.partials._spash')--}}
 
     <div class="container">
 

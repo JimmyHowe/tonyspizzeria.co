@@ -1,5 +1,5 @@
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-tonys">
 
         <div class="container">
 
@@ -13,7 +13,7 @@
                 </button>
 
                 <a class="navbar-brand" href="#">
-                    <img alt="Brand" src="/img/logo.png" style="height: 50px">
+                    <img class="logo" alt="Brand" src="/img/logo.png">
                 </a>
 
             </div>
