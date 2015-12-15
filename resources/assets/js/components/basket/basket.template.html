@@ -1,49 +1,32 @@
 
-    <div class="panel panel-danger">
+    <div id="Basket" class="panel panel-danger">
 
-        <div class="panel-body">
+        <table class="table">
 
-            <div class="col-md-6">
+            <thead id="Basket__Header">
+                <tr>
+                    <td>Item</td>
+                    <td>Price</td>
+                    <td></td>
+                </tr>
+            </thead>
 
-                <pre>{{ $data | json }}</pre>
+            <tbody id="Basket__Items">
+                <tr v-for="item in items">
+                    <td>{{ item.title }}</td>
+                    <td>{{ item.price |  currency '£'}}</td>
+                    <td><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+                </tr>
+            </tbody>
 
-            </div>
+            <tfoot id="Basket__Totals">
+                <tr>
+                    <td>Total:</td>
+                    <td>{{ getTotal | currency '£' }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
 
-            <div class="col-md-6">
-
-                <table class="table">
-
-                    <thead>
-
-                    <tr>
-                        <td>Item</td>
-                        <td>Price</td>
-                    </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                    <tr v-for="item in items">
-
-                        <td>{{ item.title }}</td>
-                        <td>{{ item.price |  currency '£'}}</td>
-
-                    </tr>
-
-                    </tbody>
-
-                    <tfoot>
-                    <tr>
-                        <td></td>
-                        <td>{{ getTotal }}</td>
-                    </tr>
-                    </tfoot>
-
-                </table>
-
-            </div>
-
-        </div>
+        </table>
 
     </div>

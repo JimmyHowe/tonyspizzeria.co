@@ -108,5 +108,36 @@ body {
 
 
 
+#Basket {
 
+  font-weight: bold;
 
+  #Basket__Header {
+    td:nth-child(2)
+    {
+      width: 60px;
+      text-align: center;
+    }
+
+    td:last-child {
+      width: 30px;
+    }
+  }
+
+  #Basket__Items {
+    td:nth-child(2)
+    {
+      text-align: center;
+    }
+  }
+
+  #Basket__Totals {
+    td:first-child {
+      text-align: right;
+    }
+    td:last-child {
+
+    }
+  }
+
+}

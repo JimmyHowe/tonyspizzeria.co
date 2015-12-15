@@ -10,11 +10,11 @@
                 <a v-for="group in menu.groups" href="#@{{ group.slug }}" class="list-group-item">@{{ group.title }}</a>
             </div>
 
+            <basket></basket>
+
         </div>
 
         <div class="col-md-8">
-
-            <basket></basket>
 
             <menu :menu="menu"></menu>
 
