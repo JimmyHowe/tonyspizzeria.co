@@ -5771,6 +5771,9 @@ body {
       padding-top: 10px;
       padding-bottom: 10px; } }
 
+.glyphicon.glyphicon-leaf {
+  color: #4e974f; }
+
 .panel {
   background-color: whitesmoke;
   border-radius: 0;
