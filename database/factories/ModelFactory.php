@@ -47,7 +47,7 @@ $factory->define(App\Product::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->sentence,
         'description' => $faker->paragraph,
-        'prices' => [ 'medium' => 2.00 ],
+        'prices' => [ 'small' => 1.00, 'medium' => 2.00, 'large' => 3.00 ],
         'options' => [ 'vegetarian' => true ]
     ];
 });
