@@ -10546,11 +10546,13 @@ module.exports = {
 
   data: function data() {
     return {
+      group: 0,
+      selected: {},
+      groups: {},
       form: {
         title: '',
         description: '',
-        headers: ['small', 'medium', 'large'],
-        prices: [1, 2, 3],
+        prices: [],
         options: {
           vegetarian: false
         }
@@ -10558,14 +10560,26 @@ module.exports = {
     };
   },
 
-  methods: {},
+  methods: {
+    updatePrices: function updatePrices() {
+      for (var i = 0; i < this.groups.length; i++) {
+        if (this.groups[i].id == this.group) {
+          this.selected = this.groups[i].headers;
+        }
+      }
+    }
+  },
 
-  ready: function ready() {}
+  ready: function ready() {
+    this.$http.get('/api/groups', function (response, status, request) {
+      this.groups = response.data;
+    });
+  }
 
 };
 
 },{"./product-form.template.html":19}],19:[function(require,module,exports){
-module.exports = '\n    <form class="form-horizontal">\n\n        <div class="form-group">\n            <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n            <div class="col-sm-10">\n                <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n            <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n            <div class="col-sm-10">\n                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n\n            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>\n\n            <div class="col-sm-10">\n\n                <template v-for="(index, header) in form.headers">\n\n                    <div class="col-sm-6">\n                        <div style="margin-bottom: 10px" class="input-group">\n                            <span class="input-group-addon">Name</span>\n                            <input v-model="header" class="form-control" name="{{header}}">\n                        </div>\n                    </div>\n\n                    <div class="col-sm-6">\n                        <div style="margin-bottom: 10px" class="input-group">\n                            <span class="input-group-addon">£</span>\n                            <input v-model="form.prices[index]" class="form-control" name="{{key}}">\n                        </div>\n                    </div>\n\n                </template>\n\n            </div>\n\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <div class="checkbox">\n                    <label>\n                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian\n                    </label>\n                </div>\n            </div>\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <button type="submit" class="btn btn-default">Save</button>\n            </div>\n        </div>\n\n        <pre>{{ $data | json }}</pre>\n\n    </form>';
+module.exports = '\n    <form class="form-horizontal">\n\n        <div class="form-group">\n            <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n            <div class="col-sm-10">\n                <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n            <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n            <div class="col-sm-10">\n                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n            </div>\n        </div>\n\n        <hr>\n        \n        <div class="form-group">\n            <label for="be-products-group" class="col-sm-2 control-label">Group</label>\n            <div class="col-sm-10">\n                <select class="form-control" v-model="group" @change="updatePrices">\n                    <option v-for="option in groups" v-bind:value="option.id">\n                        {{ option.title }}\n                    </option>\n                </select>\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n\n            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>\n\n            <div class="col-sm-10">\n\n                <template v-for="(index, header) in selected">\n\n                    <div style="margin-bottom: 10px" class="input-group">\n                        <span class="input-group-addon">{{ header }}</span>\n                        <input v-model="form.prices[index]" class="form-control" name="{{header}}">\n                    </div>\n\n                </template>\n\n            </div>\n\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <div class="checkbox">\n                    <label>\n                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian\n                    </label>\n                </div>\n            </div>\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <button type="submit" class="btn btn-default">Save</button>\n            </div>\n        </div>\n\n        <pre>{{ $data | json }}</pre>\n\n    </form>';
 },{}]},{},[11]);
 
 //# sourceMappingURL=app.js.map

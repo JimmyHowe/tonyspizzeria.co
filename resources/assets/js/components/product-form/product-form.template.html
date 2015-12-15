@@ -18,6 +18,19 @@
         </div>
 
         <hr>
+        
+        <div class="form-group">
+            <label for="be-products-group" class="col-sm-2 control-label">Group</label>
+            <div class="col-sm-10">
+                <select class="form-control" v-model="group" @change="updatePrices">
+                    <option v-for="option in groups" v-bind:value="option.id">
+                        {{ option.title }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <hr>
 
         <div class="form-group">
 
@@ -25,20 +38,11 @@
 
             <div class="col-sm-10">
 
-                <template v-for="(index, header) in form.headers">
+                <template v-for="(index, header) in selected">
 
-                    <div class="col-sm-6">
-                        <div style="margin-bottom: 10px" class="input-group">
-                            <span class="input-group-addon">Name</span>
-                            <input v-model="header" class="form-control" name="{{header}}">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <div style="margin-bottom: 10px" class="input-group">
-                            <span class="input-group-addon">£</span>
-                            <input v-model="form.prices[index]" class="form-control" name="{{key}}">
-                        </div>
+                    <div style="margin-bottom: 10px" class="input-group">
+                        <span class="input-group-addon">{{ header }}</span>
+                        <input v-model="form.prices[index]" class="form-control" name="{{header}}">
                     </div>
 
                 </template>

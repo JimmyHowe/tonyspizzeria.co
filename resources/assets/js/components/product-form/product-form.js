@@ -6,16 +6,17 @@ module.exports = {
 
   template: require("./product-form.template.html"),
 
-  props: [ 'item' ],
+  props: ['item'],
 
-  data: function()
-  {
+  data: function () {
     return {
+      group: 0,
+      selected: {},
+      groups: {},
       form: {
         title: '',
         description: '',
-        headers: ['small', 'medium', 'large'],
-        prices: [ 1, 2, 3 ],
+        prices: [],
         options: {
           vegetarian: false
         }
@@ -24,12 +25,22 @@ module.exports = {
   },
 
   methods: {
-
+    updatePrices: function()
+    {
+      for(var i = 0; i < this.groups.length; i++)
+      {
+        if(this.groups[i].id == this.group)
+        {
+          this.selected = this.groups[i].headers;
+        }
+      }
+    }
   },
 
-  ready: function()
-  {
-
+  ready: function () {
+    this.$http.get('/api/groups', function (response, status, request) {
+      this.groups = response.data;
+    });
   }
 
 };
