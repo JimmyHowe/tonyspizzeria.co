@@ -10389,7 +10389,7 @@ new Vue({
   },
 
   ready: function ready() {
-    this.$http.get('api/menu', function (response, status, request) {
+    this.$http.get('/api/menu', function (response, status, request) {
       this.menu = response.data;
     });
   }
