@@ -10380,6 +10380,8 @@ Vue.component('menu', require("./components/menu/menu"));
 
 Vue.component('item', require("./components/item/item"));
 
+Vue.component('product-form', require("./components/product-form/product-form"));
+
 new Vue({
 
   el: "#app",
@@ -10396,7 +10398,7 @@ new Vue({
 
 });
 
-},{"./components/item/item":12,"./components/menu/menu":14,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
+},{"./components/item/item":12,"./components/menu/menu":14,"./components/product-form/product-form":16,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
 "use strict";
 
 /**
@@ -10439,6 +10441,41 @@ module.exports = {
 
 },{"./menu.template.html":15}],15:[function(require,module,exports){
 module.exports = '\n    <div class="panel panel-default" v-for="group in menu.groups">\n\n        <div class="panel-heading">\n            <h1 id="{{ group.slug }}">{{ group.title }}</h1>\n        </div>\n\n        <table class="table Menu">\n\n            <tr v-for="product in group.products" is="item" :item="product"></tr>\n\n        </table>\n\n    </div>\n\n    <!--<pre>{{ $data | json }}</pre>-->';
+},{}],16:[function(require,module,exports){
+'use strict';
+
+/**
+ * Created by Jimmy on 15/12/2015.
+ */
+
+module.exports = {
+
+  template: require("./product-form.template.html"),
+
+  props: ['item'],
+
+  data: function data() {
+    return {
+      form: {
+        title: '',
+        description: '',
+        headers: ['small', 'medium', 'large'],
+        prices: [1, 2, 3],
+        options: {
+          vegetarian: false
+        }
+      }
+    };
+  },
+
+  methods: {},
+
+  ready: function ready() {}
+
+};
+
+},{"./product-form.template.html":17}],17:[function(require,module,exports){
+module.exports = '\n    <form class="form-horizontal">\n\n        <div class="form-group">\n            <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n            <div class="col-sm-10">\n                <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n            <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n            <div class="col-sm-10">\n                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n\n            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>\n\n            <div class="col-sm-10">\n\n                <template v-for="(index, header) in form.headers">\n\n                    <div class="col-sm-6">\n                        <div style="margin-bottom: 10px" class="input-group">\n                            <span class="input-group-addon">Name</span>\n                            <input v-model="header" class="form-control" name="{{header}}">\n                        </div>\n                    </div>\n\n                    <div class="col-sm-6">\n                        <div style="margin-bottom: 10px" class="input-group">\n                            <span class="input-group-addon">£</span>\n                            <input v-model="form.prices[index]" class="form-control" name="{{key}}">\n                        </div>\n                    </div>\n\n                </template>\n\n            </div>\n\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <div class="checkbox">\n                    <label>\n                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian\n                    </label>\n                </div>\n            </div>\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <button type="submit" class="btn btn-default">Save</button>\n            </div>\n        </div>\n\n        <pre>{{ $data | json }}</pre>\n\n    </form>';
 },{}]},{},[11]);
 
 //# sourceMappingURL=app.js.map

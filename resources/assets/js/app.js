@@ -10,6 +10,8 @@ Vue.component('menu', require("./components/menu/menu"));
 
 Vue.component('item', require("./components/item/item"));
 
+Vue.component('product-form', require("./components/product-form/product-form"));
+
 new Vue({
 
   el: "#app",

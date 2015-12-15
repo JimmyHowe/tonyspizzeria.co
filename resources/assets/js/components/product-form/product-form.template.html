@@ -1,0 +1,68 @@
+
+    <form class="form-horizontal">
+
+        <div class="form-group">
+            <label for="be-products-title" class="col-sm-2 control-label">Title</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="be-products-title" v-model="form.title">
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+            <label for="be-products-description" class="col-sm-2 control-label">Description</label>
+            <div class="col-sm-10">
+                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-group">
+
+            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>
+
+            <div class="col-sm-10">
+
+                <template v-for="(index, header) in form.headers">
+
+                    <div class="col-sm-6">
+                        <div style="margin-bottom: 10px" class="input-group">
+                            <span class="input-group-addon">Name</span>
+                            <input v-model="header" class="form-control" name="{{header}}">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div style="margin-bottom: 10px" class="input-group">
+                            <span class="input-group-addon">£</span>
+                            <input v-model="form.prices[index]" class="form-control" name="{{key}}">
+                        </div>
+                    </div>
+
+                </template>
+
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Save</button>
+            </div>
+        </div>
+
+        <pre>{{ $data | json }}</pre>
+
+    </form>
