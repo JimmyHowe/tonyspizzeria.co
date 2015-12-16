@@ -1,76 +1,88 @@
 
-    <form class="form-horizontal">
+    <div class="panel panel-default">
 
-        <div class="form-group">
-            <label for="be-products-title" class="col-sm-2 control-label">Title</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="be-products-title" v-model="form.title">
-            </div>
+        <div class="panel-heading">
+            <h1>New Group</h1>
         </div>
 
-        <hr>
+        <div class="panel-body">
 
-        <div class="form-group">
-            <label for="be-products-description" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10">
-                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>
-            </div>
-        </div>
+            <form class="form-horizontal">
 
-        <hr>
-
-        <div class="form-group">
-
-            <label for="be-products-description" class="col-sm-2 control-label">Headers</label>
-
-            <div class="col-sm-10">
-
-                <div class="input-group">
-                    <input v-model="header" class="form-control" @keyup.enter="add">
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default" @click="add">
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                        </button>
+                <div class="form-group">
+                    <label for="be-products-title" class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="be-products-title" v-model="form.title">
                     </div>
                 </div>
 
                 <hr>
 
-                <template v-for="header in form.headers">
+                <div class="form-group">
+                    <label for="be-products-description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>
+                    </div>
+                </div>
 
-                    <div class="input-group" style="margin-bottom: 10px">
+                <hr>
 
-                        <input v-model="form.headers[$index]" class="form-control" readonly name="headers" value="{{ form.headers[$index] }}">
+                <div class="form-group">
 
-                        <div class="input-group-btn">
-                            <!-- Up -->
-                            <button type="button" class="btn btn-default" @click="moveUp($index)">
-                                <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-                            </button>
-                            <!-- Down -->
-                            <button type="button" class="btn btn-default" @click="moveDown($index)">
-                                <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
-                            </button>
-                            <!-- Remove -->
-                            <button type="button" class="btn btn-default" @click="remove($index)">
-                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                            </button>
+                    <label for="be-products-description" class="col-sm-2 control-label">Headers</label>
+
+                    <div class="col-sm-10">
+
+                        <div class="input-group">
+                            <input v-model="header" class="form-control" @keyup.enter="add">
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" @click="add">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                            </div>
                         </div>
+
+                        <hr>
+
+                        <template v-for="header in form.headers">
+
+                            <div class="input-group" style="margin-bottom: 10px">
+
+                                <input v-model="form.headers[$index]" class="form-control" readonly name="headers" value="{{ form.headers[$index] }}">
+
+                                <div class="input-group-btn">
+                                    <!-- Up -->
+                                    <button type="button" class="btn btn-default" @click="moveUp($index)">
+                                        <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                                    </button>
+                                    <!-- Down -->
+                                    <button type="button" class="btn btn-default" @click="moveDown($index)">
+                                        <span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+                                    </button>
+                                    <!-- Remove -->
+                                    <button type="button" class="btn btn-default" @click="remove($index)">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </template>
 
                     </div>
 
-                </template>
+                </div>
 
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default" @click.prevent="submit">Save</button>
+                    </div>
+                </div>
+
+                <pre>{{ $data | json }}</pre>
+
+            </form>
 
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-default" @click.prevent="submit">Save</button>
-            </div>
-        </div>
-
-        <pre>{{ $data | json }}</pre>
-
-    </form>
+    </div>
