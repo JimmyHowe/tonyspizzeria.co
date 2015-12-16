@@ -9,8 +9,9 @@ Vue.use(require('vue-resource'));
 // Backend Stuff
 Vue.component('products-page', require('./views/products-page/products-page'));
 Vue.component('products', require('./components/products/products'));
-Vue.component('group-form', require("./components/group-form/group-form"));
 Vue.component('product-form', require("./components/product-form/product-form"));
+Vue.component('groups', require('./components/groups/groups'));
+Vue.component('group-form', require("./components/group-form/group-form"));
 
 // Frontend Stuff
 Vue.component('basket', require("./components/basket/basket"));

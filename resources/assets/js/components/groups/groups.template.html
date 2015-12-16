@@ -1,0 +1,24 @@
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h1>Groups</h1>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="groups list-group">
+
+                <div class="group list-group-item" v-for="group in groups">
+
+                    <a href="" @click.prevent="groupClick(group)" :group="group.id">{{ group.title }}</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--<pre>{{ $data | json }}</pre>-->
+
+    </div>
