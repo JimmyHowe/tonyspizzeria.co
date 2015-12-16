@@ -17,7 +17,7 @@
         </td>
 
         <td class="Menu__Button" v-for="(index, price) in item.prices">
-            <button class="btn btn-sm" @click="addItemToBasket(item, index)">Add</button>
+            <button class="btn btn-sm btn-success" @click="addItemToBasket(item, index)">+</button>
             <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->
         </td>
     </tr>

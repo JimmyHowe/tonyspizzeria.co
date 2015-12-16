@@ -10622,7 +10622,7 @@ module.exports = {
 };
 
 },{"./item.template.html":19}],19:[function(require,module,exports){
-module.exports = '\n    <tr class="Menu__Item" @click="showDetails($event)">\n        <td>\n            {{ item.title }}\n            <span v-if="item.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>\n        </td>\n\n        <td class="Menu__Price" v-for="price in item.prices">\n            {{ price | currency \'£\' }}\n        </td>\n    </tr>\n\n    <tr class="Menu__Options">\n\n        <td class="Menu__Description small">\n            {{ item.description }}\n        </td>\n\n        <td class="Menu__Button" v-for="(index, price) in item.prices">\n            <button class="btn btn-sm" @click="addItemToBasket(item, index)">Add</button>\n            <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->\n        </td>\n    </tr>';
+module.exports = '\n    <tr class="Menu__Item" @click="showDetails($event)">\n        <td>\n            {{ item.title }}\n            <span v-if="item.options.vegetarian" class="glyphicon glyphicon-leaf" aria-hidden="true"></span>\n        </td>\n\n        <td class="Menu__Price" v-for="price in item.prices">\n            {{ price | currency \'£\' }}\n        </td>\n    </tr>\n\n    <tr class="Menu__Options">\n\n        <td class="Menu__Description small">\n            {{ item.description }}\n        </td>\n\n        <td class="Menu__Button" v-for="(index, price) in item.prices">\n            <button class="btn btn-sm btn-success" @click="addItemToBasket(item, index)">+</button>\n            <!--<pre>{{ $index }} - {{ index }} - {{ price }}</pre>-->\n        </td>\n    </tr>';
 },{}],20:[function(require,module,exports){
 "use strict";
 

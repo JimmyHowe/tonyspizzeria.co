@@ -18,13 +18,15 @@
 
             </div>
 
-            <basket></basket>
+            <basket class="visible-md visible-lg"></basket>
 
         </div>
 
         <div class="col-md-8">
 
             <menu :menu="menu"></menu>
+
+            <basket class="hidden-md hidden-lg"></basket>
 
         </div>
 
