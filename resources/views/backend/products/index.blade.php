@@ -2,6 +2,6 @@
 
 @section('content')
 
-    BE
+    <products-page view="products"></products-page>
 
 @stop

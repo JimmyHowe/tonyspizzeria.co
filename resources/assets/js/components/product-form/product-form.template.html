@@ -1,72 +1,80 @@
 
-    <form class="form-horizontal">
+    <div class="panel panel-default">
 
-        <div class="form-group">
-            <label for="be-products-title" class="col-sm-2 control-label">Title</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="be-products-title" v-model="form.title">
-            </div>
-        </div>
+        <div class="panel-body">
 
-        <hr>
+            <form class="form-horizontal">
 
-        <div class="form-group">
-            <label for="be-products-description" class="col-sm-2 control-label">Description</label>
-            <div class="col-sm-10">
-                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>
-            </div>
-        </div>
+                <div class="form-group">
+                    <label for="be-products-title" class="col-sm-2 control-label">Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="be-products-title" v-model="form.title">
+                    </div>
+                </div>
 
-        <hr>
-        
-        <div class="form-group">
-            <label for="be-products-group" class="col-sm-2 control-label">Group</label>
-            <div class="col-sm-10">
-                <select class="form-control" v-model="group" @change="updatePrices">
-                    <option v-for="option in groups" v-bind:value="option.id">
-                        {{ option.title }}
-                    </option>
-                </select>
-            </div>
-        </div>
+                <hr>
 
-        <hr>
+                <div class="form-group">
+                    <label for="be-products-description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>
+                    </div>
+                </div>
 
-        <div class="form-group">
+                <hr>
 
-            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>
+                <div class="form-group">
+                    <label for="be-products-group" class="col-sm-2 control-label">Group</label>
+                    <div class="col-sm-10">
+                        <select class="form-control" v-model="group" @change="updatePrices">
+                            <option v-for="option in groups" v-bind:value="option.id">
+                                {{ option.title }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
 
-            <div class="col-sm-10">
+                <hr>
 
-                <template v-for="(index, header) in selected">
+                <div class="form-group">
 
-                    <div style="margin-bottom: 10px" class="input-group">
-                        <span class="input-group-addon">{{ header }}</span>
-                        <input v-model="form.prices[index]" class="form-control" name="{{header}}">
+                    <label for="be-products-description" class="col-sm-2 control-label">Prices</label>
+
+                    <div class="col-sm-10">
+
+                        <template v-for="(index, header) in selected">
+
+                            <div style="margin-bottom: 10px" class="input-group">
+                                <span class="input-group-addon">{{ header }}</span>
+                                <input v-model="form.prices[index]" class="form-control" name="{{header}}">
+                            </div>
+
+                        </template>
+
                     </div>
 
-                </template>
-
-            </div>
-
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian
-                    </label>
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-default" @click="submit">Save</button>
+                    </div>
+                </div>
+
+                <pre>{{ $data | json }}</pre>
+
+            </form>
+
         </div>
 
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-default" @click="submit">Save</button>
-            </div>
-        </div>
-
-        <pre>{{ $data | json }}</pre>
-
-    </form>
+    </div>

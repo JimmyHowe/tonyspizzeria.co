@@ -6,15 +6,16 @@ var Vue = require('vue');
 
 Vue.use(require('vue-resource'));
 
-Vue.component('basket', require("./components/basket/basket"));
-
-Vue.component('menu', require("./components/menu/menu"));
-
-Vue.component('item', require("./components/item/item"));
-
+// Backend Stuff
+Vue.component('products-page', require('./views/products-page/products-page'));
+Vue.component('products', require('./components/products/products'));
 Vue.component('group-form', require("./components/group-form/group-form"));
-
 Vue.component('product-form', require("./components/product-form/product-form"));
+
+// Frontend Stuff
+Vue.component('basket', require("./components/basket/basket"));
+Vue.component('menu', require("./components/menu/menu"));
+Vue.component('item', require("./components/item/item"));
 
 Vue.config.debug = true;
 

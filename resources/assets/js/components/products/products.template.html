@@ -1,0 +1,24 @@
+
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+            <h1>Products</h1>
+        </div>
+
+        <div class="panel-body">
+
+            <div class="products list-group">
+
+                <div class="product list-group-item" v-for="product in products">
+
+                    <a href="" @click.prevent="productClick(product)" :product="product.id">{{ product.title }}</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--<pre>{{ $data | json }}</pre>-->
+
+    </div>

@@ -10376,15 +10376,16 @@ var Vue = require('vue');
 
 Vue.use(require('vue-resource'));
 
-Vue.component('basket', require("./components/basket/basket"));
-
-Vue.component('menu', require("./components/menu/menu"));
-
-Vue.component('item', require("./components/item/item"));
-
+// Backend Stuff
+Vue.component('products-page', require('./views/products-page/products-page'));
+Vue.component('products', require('./components/products/products'));
 Vue.component('group-form', require("./components/group-form/group-form"));
-
 Vue.component('product-form', require("./components/product-form/product-form"));
+
+// Frontend Stuff
+Vue.component('basket', require("./components/basket/basket"));
+Vue.component('menu', require("./components/menu/menu"));
+Vue.component('item', require("./components/item/item"));
 
 Vue.config.debug = true;
 
@@ -10408,7 +10409,7 @@ new Vue({
 
 });
 
-},{"./components/basket/basket":12,"./components/group-form/group-form":14,"./components/item/item":16,"./components/menu/menu":18,"./components/product-form/product-form":20,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
+},{"./components/basket/basket":12,"./components/group-form/group-form":14,"./components/item/item":16,"./components/menu/menu":18,"./components/product-form/product-form":20,"./components/products/products":22,"./views/products-page/products-page":24,"vue":10,"vue-resource":3}],12:[function(require,module,exports){
 "use strict";
 
 /**
@@ -10654,7 +10655,89 @@ module.exports = {
 };
 
 },{"./product-form.template.html":21}],21:[function(require,module,exports){
-module.exports = '\n    <form class="form-horizontal">\n\n        <div class="form-group">\n            <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n            <div class="col-sm-10">\n                <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n            <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n            <div class="col-sm-10">\n                <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n            </div>\n        </div>\n\n        <hr>\n        \n        <div class="form-group">\n            <label for="be-products-group" class="col-sm-2 control-label">Group</label>\n            <div class="col-sm-10">\n                <select class="form-control" v-model="group" @change="updatePrices">\n                    <option v-for="option in groups" v-bind:value="option.id">\n                        {{ option.title }}\n                    </option>\n                </select>\n            </div>\n        </div>\n\n        <hr>\n\n        <div class="form-group">\n\n            <label for="be-products-description" class="col-sm-2 control-label">Prices</label>\n\n            <div class="col-sm-10">\n\n                <template v-for="(index, header) in selected">\n\n                    <div style="margin-bottom: 10px" class="input-group">\n                        <span class="input-group-addon">{{ header }}</span>\n                        <input v-model="form.prices[index]" class="form-control" name="{{header}}">\n                    </div>\n\n                </template>\n\n            </div>\n\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <div class="checkbox">\n                    <label>\n                        <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian\n                    </label>\n                </div>\n            </div>\n        </div>\n\n        <div class="form-group">\n            <div class="col-sm-offset-2 col-sm-10">\n                <button type="button" class="btn btn-default" @click="submit">Save</button>\n            </div>\n        </div>\n\n        <pre>{{ $data | json }}</pre>\n\n    </form>';
+module.exports = '\n    <div class="panel panel-default">\n\n        <div class="panel-body">\n\n            <form class="form-horizontal">\n\n                <div class="form-group">\n                    <label for="be-products-title" class="col-sm-2 control-label">Title</label>\n                    <div class="col-sm-10">\n                        <input type="text" class="form-control" id="be-products-title" v-model="form.title">\n                    </div>\n                </div>\n\n                <hr>\n\n                <div class="form-group">\n                    <label for="be-products-description" class="col-sm-2 control-label">Description</label>\n                    <div class="col-sm-10">\n                        <textarea name="description" class="form-control" id="be-products-description" v-model="form.description"></textarea>\n                    </div>\n                </div>\n\n                <hr>\n\n                <div class="form-group">\n                    <label for="be-products-group" class="col-sm-2 control-label">Group</label>\n                    <div class="col-sm-10">\n                        <select class="form-control" v-model="group" @change="updatePrices">\n                            <option v-for="option in groups" v-bind:value="option.id">\n                                {{ option.title }}\n                            </option>\n                        </select>\n                    </div>\n                </div>\n\n                <hr>\n\n                <div class="form-group">\n\n                    <label for="be-products-description" class="col-sm-2 control-label">Prices</label>\n\n                    <div class="col-sm-10">\n\n                        <template v-for="(index, header) in selected">\n\n                            <div style="margin-bottom: 10px" class="input-group">\n                                <span class="input-group-addon">{{ header }}</span>\n                                <input v-model="form.prices[index]" class="form-control" name="{{header}}">\n                            </div>\n\n                        </template>\n\n                    </div>\n\n                </div>\n\n                <div class="form-group">\n                    <div class="col-sm-offset-2 col-sm-10">\n                        <div class="checkbox">\n                            <label>\n                                <input type="checkbox" id="checkbox" name="options[]" value="vegetarian" v-model="form.options.vegetarian"> Vegetarian\n                            </label>\n                        </div>\n                    </div>\n                </div>\n\n                <div class="form-group">\n                    <div class="col-sm-offset-2 col-sm-10">\n                        <button type="button" class="btn btn-default" @click="submit">Save</button>\n                    </div>\n                </div>\n\n                <pre>{{ $data | json }}</pre>\n\n            </form>\n\n        </div>\n\n    </div>';
+},{}],22:[function(require,module,exports){
+'use strict';
+
+/**
+ * Created by Jimmy on 16/12/2015.
+ */
+
+module.exports = {
+
+  template: require('./products.template.html'),
+
+  props: ['active'],
+
+  data: function data() {
+    return {
+      products: {}
+    };
+  },
+
+  methods: {
+
+    /*
+        Update the parent active state when clicked
+     */
+    productClick: function productClick(product) {
+      this.active = product;
+
+      this.$dispatch('update.view', 'product-form');
+    }
+
+  },
+
+  ready: function ready() {
+    this.$http.get('/api/products', function (response, status, request) {
+
+      this.products = response.data;
+    });
+  }
+
+};
+
+},{"./products.template.html":23}],23:[function(require,module,exports){
+module.exports = '\n    <div class="panel panel-default">\n\n        <div class="panel-heading">\n            <h1>Products</h1>\n        </div>\n\n        <div class="panel-body">\n\n            <div class="products list-group">\n\n                <div class="product list-group-item" v-for="product in products">\n\n                    <a href="" @click.prevent="productClick(product)" :product="product.id">{{ product.title }}</a>\n\n                </div>\n\n            </div>\n\n        </div>\n\n        <!--<pre>{{ $data | json }}</pre>-->\n\n    </div>';
+},{}],24:[function(require,module,exports){
+'use strict';
+
+/**
+ * Created by Jimmy on 16/12/2015.
+ */
+
+module.exports = {
+
+  template: require('./products-page.template.html'),
+
+  props: ['view'],
+
+  data: function data() {
+    return {
+      active: null,
+      product: {}
+    };
+  },
+
+  methods: {
+
+    updateView: function updateView(view) {
+      this.view = view;
+    }
+
+  },
+
+  ready: function ready() {
+
+    this.$on('update.view', function (view) {
+      this.view = view;
+    });
+  }
+
+};
+
+},{"./products-page.template.html":25}],25:[function(require,module,exports){
+module.exports = '\n    <div class="row">\n\n        <div class="col-md-4">\n\n            <div class="panel">\n\n                <div class="panel-heading">\n                    <h1>Products</h1>\n                </div>\n\n                <div class="panel-body">\n\n                    <div class="list-group">\n                        <a href="" @click.prevent="updateView(\'products\')" class="list-group-item">Products</a>\n                        <a href="" @click.prevent="updateView(\'product-form\')" class="list-group-item">New Product</a>\n                        <hr>\n                        <a href="" class="list-group-item">Groups</a>\n                        <a href="" class="list-group-item">New Group</a>\n                        <hr>\n                        <a href="" class="list-group-item"></a>\n                        <a href="" class="list-group-item"></a>\n                    </div>\n                    \n                </div>\n\n            </div>\n\n        </div>\n\n\n        <div class="col-md-8">\n\n            <component :is="view" :active.sync="active" keep-alive></component>\n\n            <pre>{{ $data | json }}</pre>\n\n        </div>\n        \n    </div>';
 },{}]},{},[11]);
 
 //# sourceMappingURL=app.js.map
