@@ -8,6 +8,10 @@
 
             <div class="panel">
 
+                <div class="panel-heading">
+                    <h1>Menu</h1>
+                </div>
+
                 <div class="list-group">
                     <a v-for="group in menu.groups" href="#@{{ group.slug }}" class="list-group-item">@{{ group.title }}</a>
                 </div>
