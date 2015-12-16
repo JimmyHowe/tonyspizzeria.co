@@ -10460,7 +10460,7 @@ module.exports = {
 };
 
 },{"./basket.template.html":13}],13:[function(require,module,exports){
-module.exports = '\n    <div id="Basket" class="panel panel-danger">\n\n        <table class="table">\n\n            <thead id="Basket__Header">\n                <tr>\n                    <td>Item</td>\n                    <td>Price</td>\n                    <td></td>\n                </tr>\n            </thead>\n\n            <tbody id="Basket__Items">\n                <tr v-for="item in items">\n                    <td>{{ item.title }}</td>\n                    <td>{{ item.price |  currency \'£\'}}</td>\n                    <td><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>\n                </tr>\n            </tbody>\n\n            <tfoot id="Basket__Totals">\n                <tr>\n                    <td>Total:</td>\n                    <td>{{ getTotal | currency \'£\' }}</td>\n                    <td></td>\n                </tr>\n            </tfoot>\n\n        </table>\n\n\n        <div class="panel-body">\n\n            <button type="button" class="btn btn-lg btn-block btn-success">Apply Student Discount</button>\n            <button type="button" class="btn btn-lg btn-block btn-success">Enter Coupon</button>\n            <hr style="margin: 6px 0 6px 0">\n            <button type="button" class="btn btn-lg btn-block btn-danger">Checkout!</button>\n\n        </div>\n\n\n    </div>';
+module.exports = '\n    <div id="Basket" class="panel">\n\n        <div class="panel-heading">\n            <h1>Basket</h1>\n        </div>\n\n        <template v-if="items.length == 0">\n            <div class="alert-info" role="alert" style="padding: 20px; text-align: center">\n                <strong>Your Basket is Empty!</strong>\n                <p style="margin-bottom: 0">Click items in the menu to add to your basket.</p>\n            </div>\n        </template>\n\n        <template v-if="items.length > 0">\n\n            <table class="table">\n\n                <!--<thead id="Basket__Header">-->\n                    <!--<tr>-->\n                        <!--<td>Item</td>-->\n                        <!--<td>Price</td>-->\n                        <!--<td></td>-->\n                    <!--</tr>-->\n                <!--</thead>-->\n\n                <tbody id="Basket__Items">\n                    <tr v-for="item in items">\n                        <td>{{ item.title }}</td>\n                        <td>{{ item.price |  currency \'£\'}}</td>\n                        <td><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>\n                    </tr>\n                </tbody>\n\n                <tfoot id="Basket__Totals">\n                    <tr>\n                        <td>Total:</td>\n                        <td>{{ getTotal | currency \'£\' }}</td>\n                        <td></td>\n                    </tr>\n                </tfoot>\n\n            </table>\n\n\n            <div class="panel-body">\n\n                <div class="input-group">\n                    <input type="text" class="form-control" placeholder="Enter Coupon Code">\n                    <span class="input-group-btn">\n                        <button class="btn btn-default" type="button">Apply</button>\n                    </span>\n                </div><!-- /input-group -->\n\n            </div>\n\n            <hr style="margin: 0">\n\n            <div class="panel-body">\n\n                <button type="button" class="btn btn-success">Apply Student Discount</button>\n                <button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>\n\n            </div>\n\n        </template>\n\n    </div>';
 },{}],14:[function(require,module,exports){
 'use strict';
 
@@ -10669,7 +10669,19 @@ module.exports = {
     };
   },
 
+  ready: function ready() {
+
+    this.loadGroups();
+  },
+
   methods: {
+
+    loadGroups: function loadGroups() {
+
+      this.$http.get('/api/groups', function (response, status, request) {
+        this.groups = response.data;
+      });
+    },
 
     updatePrices: function updatePrices() {
       for (var i = 0; i < this.groups.length; i++) {
@@ -10688,12 +10700,6 @@ module.exports = {
         console.log(response);
       });
     }
-  },
-
-  ready: function ready() {
-    this.$http.get('/api/groups', function (response, status, request) {
-      this.groups = response.data;
-    });
   }
 
 };
@@ -10781,7 +10787,7 @@ module.exports = {
 };
 
 },{"./products-page.template.html":27}],27:[function(require,module,exports){
-module.exports = '\n    <div class="row">\n\n        <div class="col-md-4">\n\n            <div class="panel">\n\n                <div class="panel-heading">\n                    <h1>Products</h1>\n                </div>\n\n                <div class="panel-body">\n\n                    <div class="list-group">\n                        <a href="" @click.prevent="updateView(\'products\')" class="list-group-item">Products</a>\n                        <a href="" @click.prevent="updateView(\'product-form\')" class="list-group-item">New Product</a>\n                        <hr>\n                        <a href="" @click.prevent="updateView(\'groups\')" class="list-group-item">Groups</a>\n                        <a href="" @click.prevent="updateView(\'group-form\')" class="list-group-item">New Group</a>\n                        <hr>\n                        <a href="" class="list-group-item"></a>\n                        <a href="" class="list-group-item"></a>\n                    </div>\n                    \n                </div>\n\n            </div>\n\n        </div>\n\n\n        <div class="col-md-8">\n\n            <component :is="view" :active.sync="active" keep-alive></component>\n\n            <pre>{{ $data | json }}</pre>\n\n        </div>\n        \n    </div>';
+module.exports = '\n    <div class="row">\n\n        <div class="col-md-4">\n\n            <div class="panel">\n\n                <div class="panel-heading">\n                    <h1>Products</h1>\n                </div>\n\n                <div class="panel-body">\n\n                    <div class="list-group">\n                        <a href="" @click.prevent="updateView(\'products\')" class="list-group-item">Products</a>\n                        <a href="" @click.prevent="updateView(\'product-form\')" class="list-group-item">New Product</a>\n                        <hr>\n                        <a href="" @click.prevent="updateView(\'groups\')" class="list-group-item">Groups</a>\n                        <a href="" @click.prevent="updateView(\'group-form\')" class="list-group-item">New Group</a>\n                        <hr>\n                        <a href="" class="list-group-item"></a>\n                        <a href="" class="list-group-item"></a>\n                    </div>\n                    \n                </div>\n\n            </div>\n\n        </div>\n\n\n        <div class="col-md-8">\n\n            <component :is="view" :active.sync="active" :item="active" keep-alive></component>\n\n            <pre>{{ $data | json }}</pre>\n\n        </div>\n        \n    </div>';
 },{}]},{},[11]);
 
 //# sourceMappingURL=app.js.map

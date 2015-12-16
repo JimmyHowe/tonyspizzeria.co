@@ -1,43 +1,68 @@
 
-    <div id="Basket" class="panel panel-danger">
+    <div id="Basket" class="panel">
 
-        <table class="table">
-
-            <thead id="Basket__Header">
-                <tr>
-                    <td>Item</td>
-                    <td>Price</td>
-                    <td></td>
-                </tr>
-            </thead>
-
-            <tbody id="Basket__Items">
-                <tr v-for="item in items">
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.price |  currency '£'}}</td>
-                    <td><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
-                </tr>
-            </tbody>
-
-            <tfoot id="Basket__Totals">
-                <tr>
-                    <td>Total:</td>
-                    <td>{{ getTotal | currency '£' }}</td>
-                    <td></td>
-                </tr>
-            </tfoot>
-
-        </table>
-
-
-        <div class="panel-body">
-
-            <button type="button" class="btn btn-lg btn-block btn-success">Apply Student Discount</button>
-            <button type="button" class="btn btn-lg btn-block btn-success">Enter Coupon</button>
-            <hr style="margin: 6px 0 6px 0">
-            <button type="button" class="btn btn-lg btn-block btn-danger">Checkout!</button>
-
+        <div class="panel-heading">
+            <h1>Basket</h1>
         </div>
 
+        <template v-if="items.length == 0">
+            <div class="alert-info" role="alert" style="padding: 20px; text-align: center">
+                <strong>Your Basket is Empty!</strong>
+                <p style="margin-bottom: 0">Click items in the menu to add to your basket.</p>
+            </div>
+        </template>
+
+        <template v-if="items.length > 0">
+
+            <table class="table">
+
+                <!--<thead id="Basket__Header">-->
+                    <!--<tr>-->
+                        <!--<td>Item</td>-->
+                        <!--<td>Price</td>-->
+                        <!--<td></td>-->
+                    <!--</tr>-->
+                <!--</thead>-->
+
+                <tbody id="Basket__Items">
+                    <tr v-for="item in items">
+                        <td>{{ item.title }}</td>
+                        <td>{{ item.price |  currency '£'}}</td>
+                        <td><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+                    </tr>
+                </tbody>
+
+                <tfoot id="Basket__Totals">
+                    <tr>
+                        <td>Total:</td>
+                        <td>{{ getTotal | currency '£' }}</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+
+            <div class="panel-body">
+
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Enter Coupon Code">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Apply</button>
+                    </span>
+                </div><!-- /input-group -->
+
+            </div>
+
+            <hr style="margin: 0">
+
+            <div class="panel-body">
+
+                <button type="button" class="btn btn-success">Apply Student Discount</button>
+                <button type="button" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span></button>
+
+            </div>
+
+        </template>
 
     </div>

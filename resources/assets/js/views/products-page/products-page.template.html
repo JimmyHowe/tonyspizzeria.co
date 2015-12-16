@@ -31,7 +31,7 @@
 
         <div class="col-md-8">
 
-            <component :is="view" :active.sync="active" keep-alive></component>
+            <component :is="view" :active.sync="active" :item="active" keep-alive></component>
 
             <pre>{{ $data | json }}</pre>
 

@@ -24,7 +24,21 @@ module.exports = {
     }
   },
 
+  ready: function () {
+
+    this.loadGroups();
+
+  },
+
   methods: {
+
+    loadGroups: function () {
+
+      this.$http.get('/api/groups', function (response, status, request) {
+        this.groups = response.data;
+      });
+
+    },
 
     updatePrices: function()
     {
@@ -47,12 +61,6 @@ module.exports = {
         console.log(response);
       })
     }
-  },
-
-  ready: function () {
-    this.$http.get('/api/groups', function (response, status, request) {
-      this.groups = response.data;
-    });
   }
 
 };
